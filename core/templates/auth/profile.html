@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile - VendorSaathi{% endblock %}
+
+{% block content %}
+<!-- Profile Header -->
+<section class="vendor-profile-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4 mb-md-0">
+                <div class="vendor-profile-image">
+                    <img src="{{ vendor.display_photo }}" alt="{{ vendor.name }}" class="img-fluid rounded-circle">
+                    <div class="verified-badge">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="vendor-profile-info">
+                    <div class="vendor-category-tag">
+                        <i class="fas fa-tag"></i> {{ vendor.category }}
+                    </div>
+                    <h1 class="vendor-profile-name">{{ vendor.name }}</h1>
+                    <div class="vendor-profile-location">
+                        <i class="fas fa-map-marker-alt"></i> {{ vendor.location }}
+                    </div>
+                    <div class="vendor-profile-rating">
+                        <div class="stars-large">
+                            {% for i in "12345" %}
+                                <i class="fas fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <span class="rating-count">({{ reviews|length }} reviews)</span>
+                    </div>
+                    <div class="vendor-profile-stats">
+                        <div class="stat-box">
+                            <i class="fas fa-box"></i>
+                            <div>
+                                <strong>{{ products|length }}</strong>
+                                <span>Products</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-comments"></i>
+                            <div>
+                                <strong>{{ reviews|length }}</strong>
+                                <span>Reviews</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <strong>{{ user.username }}</strong>
+                                <span>Username</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if vendor.phone or vendor.email or vendor.website %}
+                    <div class="vendor-contact-info mt-3">
+                        {% if vendor.phone %}
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:{{ vendor.phone }}">{{ vendor.phone }}</a>
+                        </div>
+                        {% endif %}
+                        {% if vendor.email %}
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a>
+                        </div>
+                        {% endif %}
+                        {% if vendor.website %}
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <a href="{{ vendor.website }}" target="_blank" rel="noopener">Visit Website</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="vendor-profile-actions">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-contact">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                        <a href="{% url 'vendor_detail' vendor.id %}" class="btn btn-outline-primary">
+                            <i class="fas fa-eye"></i> View Public Profile
+                        </a>
+                        <a href="{% url 'vendors' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-store"></i> Browse Vendors
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Messages -->
+{% if messages %}
+<section class="py-3">
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Vendor Story Section -->
+<section class="vendor-story-section">
+    <div class="container">
+        <div class="story-card">
+            <div class="story-header">
+                <i class="fas fa-book-open"></i>
+                <h2>Your Business Story</h2>
+            </div>
+            <div class="story-content">
+                <p>{{ vendor.story }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="products-section">
+    <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-bag"></i> Your Products & Services
+                </h2>
+                <p class="section-subtitle">{{ products|length }} product{{ products|length|pluralize }} listed</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Product
+                </a>
+            </div>
+        </div>
+
+        {% if products %}
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <div class="product-image">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="product-details">
+                        <h5 class="product-name">{{ product.name }}</h5>
+                        <div class="product-price">
+                            <i class="fas fa-rupee-sign"></i> {{ product.price }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-products">
+            <i class="fas fa-box-open"></i>
+            <h4>No Products Added Yet</h4>
+            <p>Start adding products to showcase your offerings</p>
+            <a href="#" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Your First Product
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Customer Reviews
+            </h2>
+            <p class="section-subtitle">{{ reviews|length }} review{{ reviews|length|pluralize }} from happy customers</p>
+        </div>
+
+        {% if reviews %}
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="reviews-list">
+                    {% for review in reviews %}
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    {{ review.name|first|upper }}
+                                </div>
+                                <div>
+                                    <h5 class="reviewer-name">{{ review.name }}</h5>
+                                    <div class="review-stars">
+                                        {% for i in "12345" %}
+                                            {% if forloop.counter <= review.rating %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-comment">
+                            <p>{{ review.comment }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="review-summary">
+                    <h4 class="summary-title">Rating Overview</h4>
+                    <div class="average-rating">
+                        <div class="rating-number">4.8</div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="rating-count">Based on {{ reviews|length }} review{{ reviews|length|pluralize }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="no-reviews">
+            <i class="fas fa-comment-slash"></i>
+            <h4>No Reviews Yet</h4>
+            <p>Start providing great service and reviews will follow!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

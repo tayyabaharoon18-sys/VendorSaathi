@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}VendorSaathi - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-text animate-fade-in-up">
+            <h1 class="hero-title">VendorSaathi</h1>
+            <p class="hero-subtitle">Empowering Street Vendors Digitally</p>
+            <div class="hero-buttons">
+                <a href="{% url 'vendors' %}" class="btn btn-hero btn-hero-primary">
+                    <i class="fas fa-search"></i> Explore Vendors
+                </a>
+                <a href="{% url 'awareness' %}" class="btn btn-hero btn-hero-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll Down Indicator -->
+    <div class="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Why Choose VendorSaathi?</h2>
+            <p class="section-subtitle">Connecting communities with local heroes</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h4 class="feature-title">Discover Local Vendors</h4>
+                    <p class="feature-text">Find authentic street vendors in your area offering quality products and services at affordable prices.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="feature-title">Support Local Business</h4>
+                    <p class="feature-text">Help street vendors grow their business digitally and contribute to your local economy.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4 class="feature-title">Easy Access</h4>
+                    <p class="feature-text">Browse products, read reviews, and connect with vendors anytime, anywhere from your device.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Browse by Category</h2>
+            <p class="section-subtitle">Find exactly what you're looking for</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Food & Beverages" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h5 class="category-name">Food & Beverages</h5>
+                    <p class="category-desc">Delicious street food & refreshments</p>
+                </a>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Handicrafts & Art" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h5 class="category-name">Handicrafts & Art</h5>
+                    <p class="category-desc">Handmade crafts & artisan products</p>
+                </a>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Agriculture & Produce" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h5 class="category-name">Fresh Produce</h5>
+                    <p class="category-desc">Organic vegetables & fruits</p>
+                </a>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Fashion & Tailoring" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h5 class="category-name">Fashion & Tailoring</h5>
+                    <p class="category-desc">Custom clothing & alterations</p>
+                </a>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Electronics & Repair" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h5 class="category-name">Repair Services</h5>
+                    <p class="category-desc">Electronics & device repairs</p>
+                </a>
+            </div>
+            
+            <div class="col-md-4 col-sm-6">
+                <a href="{% url 'vendors' %}?category=Beauty & Wellness" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h5 class="category-name">Beauty & Wellness</h5>
+                    <p class="category-desc">Beauty services & treatments</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <i class="fas fa-users stat-icon"></i>
+                    <h3 class="stat-number">{{ vendor_count|default:"10" }}+</h3>
+                    <p class="stat-label">Registered Vendors</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <i class="fas fa-box stat-icon"></i>
+                    <h3 class="stat-number">{{ product_count|default:"30" }}+</h3>
+                    <p class="stat-label">Products & Services</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <i class="fas fa-star stat-icon"></i>
+                    <h3 class="stat-number">{{ review_count|default:"20" }}+</h3>
+                    <p class="stat-label">Happy Reviews</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <i class="fas fa-map-marker-alt stat-icon"></i>
+                    <h3 class="stat-number">{{ city_count|default:"5" }}+</h3>
+                    <p class="stat-label">Cities Covered</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title">Join VendorSaathi Today!</h2>
+            <p class="cta-text">Are you a street vendor? Register now and take your business online. Reach more customers and grow your business digitally.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-light btn-lg">
+                    <i class="fas fa-user-plus"></i> Register as Vendor
+                </a>
+                <a href="#" class="btn btn-outline-light btn-lg ms-2">
+                    <i class="fas fa-phone"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

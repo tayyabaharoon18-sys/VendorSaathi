@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - VendorSaathi{% endblock %}
+
+{% block content %}
+<!-- Register Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 text-center">
+                <h1 class="page-title">
+                    <i class="fas fa-user-plus"></i> Vendor Registration
+                </h1>
+                <p class="page-subtitle">Join VendorSaathi and grow your business digitally</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form Section -->
+<section class="auth-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="auth-card">
+                    <div class="auth-card-header">
+                        <h3><i class="fas fa-registered"></i> Create Your Vendor Account</h3>
+                        <p>Fill in the details below to start your digital journey</p>
+                    </div>
+                    
+                    <div class="auth-card-body">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <!-- User Account Details -->
+                            <div class="form-section">
+                                <h5 class="form-section-title">
+                                    <i class="fas fa-user"></i> Account Information
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ user_form.first_name.id_for_label }}" class="form-label">First Name *</label>
+                                        {{ user_form.first_name }}
+                                        {% if user_form.first_name.errors %}
+                                            <div class="text-danger">{{ user_form.first_name.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ user_form.last_name.id_for_label }}" class="form-label">Last Name *</label>
+                                        {{ user_form.last_name }}
+                                        {% if user_form.last_name.errors %}
+                                            <div class="text-danger">{{ user_form.last_name.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ user_form.username.id_for_label }}" class="form-label">Username *</label>
+                                    {{ user_form.username }}
+                                    {% if user_form.username.errors %}
+                                        <div class="text-danger">{{ user_form.username.errors }}</div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Letters, digits and @/./+/-/_ only</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ user_form.email.id_for_label }}" class="form-label">Email Address *</label>
+                                    {{ user_form.email }}
+                                    {% if user_form.email.errors %}
+                                        <div class="text-danger">{{ user_form.email.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ user_form.password1.id_for_label }}" class="form-label">Password *</label>
+                                        {{ user_form.password1 }}
+                                        {% if user_form.password1.errors %}
+                                            <div class="text-danger">{{ user_form.password1.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ user_form.password2.id_for_label }}" class="form-label">Confirm Password *</label>
+                                        {{ user_form.password2 }}
+                                        {% if user_form.password2.errors %}
+                                            <div class="text-danger">{{ user_form.password2.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Business/Vendor Profile Details -->
+                            <div class="form-section">
+                                <h5 class="form-section-title">
+                                    <i class="fas fa-store"></i> Business Information
+                                </h5>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ profile_form.name.id_for_label }}" class="form-label">Business Name *</label>
+                                    {{ profile_form.name }}
+                                    {% if profile_form.name.errors %}
+                                        <div class="text-danger">{{ profile_form.name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ profile_form.category.id_for_label }}" class="form-label">Business Category *</label>
+                                        {{ profile_form.category }}
+                                        {% if profile_form.category.errors %}
+                                            <div class="text-danger">{{ profile_form.category.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ profile_form.location.id_for_label }}" class="form-label">Location *</label>
+                                        {{ profile_form.location }}
+                                        {% if profile_form.location.errors %}
+                                            <div class="text-danger">{{ profile_form.location.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ profile_form.photo.id_for_label }}" class="form-label">Business Photo</label>
+                                    {{ profile_form.photo }}
+                                    {% if profile_form.photo.errors %}
+                                        <div class="text-danger">{{ profile_form.photo.errors }}</div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Upload a photo of your business</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ profile_form.story.id_for_label }}" class="form-label">Your Business Story *</label>
+                                    {{ profile_form.story }}
+                                    {% if profile_form.story.errors %}
+                                        <div class="text-danger">{{ profile_form.story.errors }}</div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Tell customers about your business journey</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Information (Optional) -->
+                            <div class="form-section">
+                                <h5 class="form-section-title">
+                                    <i class="fas fa-address-card"></i> Contact Information (Optional)
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ profile_form.phone.id_for_label }}" class="form-label">Phone Number</label>
+                                        {{ profile_form.phone }}
+                                        {% if profile_form.phone.errors %}
+                                            <div class="text-danger">{{ profile_form.phone.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ profile_form.email.id_for_label }}" class="form-label">Business Email</label>
+                                        {{ profile_form.email }}
+                                        {% if profile_form.email.errors %}
+                                            <div class="text-danger">{{ profile_form.email.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ profile_form.website.id_for_label }}" class="form-label">Website/Social Media</label>
+                                    {{ profile_form.website }}
+                                    {% if profile_form.website.errors %}
+                                        <div class="text-danger">{{ profile_form.website.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-user-plus"></i> Create Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="auth-card-footer">
+                        <p class="text-center mb-0">
+                            Already have an account? 
+                            <a href="{% url 'login' %}" class="text-primary fw-bold">Login Here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
