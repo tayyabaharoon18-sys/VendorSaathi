@@ -123,43 +123,6 @@
     </div>
 </section>
 
-<!-- Products Section -->
-<section class="products-section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">
-                <i class="fas fa-shopping-bag"></i> Products & Services
-            </h2>
-            <p class="section-subtitle">Explore what {{ vendor.name }} has to offer</p>
-        </div>
-
-        {% if products %}
-        <div class="row g-4">
-            {% for product in products %}
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product-card">
-                    <div class="product-details">
-                        <h5 class="product-name">{{ product.name }}</h5>
-                        <div class="product-price">
-                            <i class="fas fa-rupee-sign"></i> {{ product.price }}
-                        </div>
-                        <button class="btn btn-sm btn-outline-primary btn-add-cart">
-                            <i class="fas fa-cart-plus"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div class="no-products">
-            <i class="fas fa-box-open"></i>
-            <p>No products available at the moment.</p>
-        </div>
-        {% endif %}
-    </div>
-</section>
-
 <!-- Reviews Section -->
 <section class="reviews-section">
     <div class="container">
